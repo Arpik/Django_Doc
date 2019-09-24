@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'Django_Doc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_doc',
-        'USER': 'djangodoc',
-        'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
+        'NAME': 'djangodoc',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
