@@ -53,4 +53,16 @@ class QuestionModelTests(TestCase):
             self.assertContains(response, "No polls are available.")
             self.assertQuerysetEqual(response.context['latest_question_list'], [])
 
-     
+        def test_past_question(self):
+            """
+                Questions with a pub_date in the past are displayed on the
+                index page.
+            """
+            create_quesiton(question_text = "Past question.", days = -30)
+            response = self.client.get(reverse('polls:index'))
+            self.assertQuerysetEqual(
+                response.context['latest_question_list'], 
+                ['<Question: Past question.>']
+            )
+
+        
