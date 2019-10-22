@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse, timezone
+from django.urls import reverse
+from django.utils import timezone
 from django.views import generic 
 
 from .models import Choice, Question
@@ -21,6 +22,13 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name= 'polls/detail.html' 
+
+    def def get_queryset(self):
+        """
+            Exludes any quesitons that aren't published yet. 
+        """
+        return Question.objects.filter(pub_date__lte = timezone.now())
+    
 
 class ResultsView(generic.DetailView):
     model = Question
